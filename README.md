@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# Ruby on Rails Tutorial
+
+## "hello,world!"
+
+This is my first application by Ruby on rails!
