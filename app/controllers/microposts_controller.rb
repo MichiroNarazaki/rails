@@ -24,13 +24,15 @@ class MicropostsController < ApplicationController
   # POST /microposts
   # POST /microposts.json
   def create
+    # @micropost = Micropost.new(params[:micropost])
     @micropost = Micropost.new(micropost_params)
 
     respond_to do |format|
-      if @micropost.save
+	  if @micropost.save	
+        # format.html { redirect_to @micropost,status: 302, notice: 'Micropost was successfully created.' }
         format.html { redirect_to @micropost, notice: 'Micropost was successfully created.' }
         format.json { render :show, status: :created, location: @micropost }
-      else
+	  else
         format.html { render :new }
         format.json { render json: @micropost.errors, status: :unprocessable_entity }
       end
@@ -41,11 +43,13 @@ class MicropostsController < ApplicationController
   # PATCH/PUT /microposts/1.json
   def update
     respond_to do |format|
-      if @micropost.update(micropost_params)
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully updated.' }
+	  if @micropost.update(micropost_params)
+        format.html { redirect_to @micropost ,notice: 'Micropost was successfully updated.' }
+        # format.html { redirect_to @micropost, notice: 'Micropost was successfully updated.' }
         format.json { render :show, status: :ok, location: @micropost }
       else
-        format.html { render :edit }
+        # format.html { render :edit ,status: 302} ##this status was forced to be 302
+        format.html { render :edit} ##this status was forced to be 302
         format.json { render json: @micropost.errors, status: :unprocessable_entity }
       end
     end
@@ -64,7 +68,7 @@ class MicropostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_micropost
-      @micropost = Micropost.find(params[:id])
+	  @micropost = Micropost.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
