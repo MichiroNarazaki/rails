@@ -3,6 +3,7 @@ require "application_system_test_case"
 class MicropostsTest < ApplicationSystemTestCase
   setup do
     @micropost = microposts(:one)
+    @user = users(:one)
   end
 
   test "visiting the index" do
@@ -15,7 +16,7 @@ class MicropostsTest < ApplicationSystemTestCase
     click_on "New Micropost"
 
     fill_in "Content", with: @micropost.content
-    fill_in "User", with: @micropost.user_id
+    fill_in "User", with: @user.id
     click_on "Create Micropost"
 
     assert_text "Micropost was successfully created"
@@ -27,7 +28,7 @@ class MicropostsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Content", with: @micropost.content
-    fill_in "User", with: @micropost.user_id
+    fill_in "User", with: @user.id
     click_on "Update Micropost"
 
     assert_text "Micropost was successfully updated"

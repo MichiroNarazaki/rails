@@ -12,7 +12,6 @@ gem 'bootsnap',   '1.4.5', require: false
 group :development, :test do
   gem 'sqlite3', '1.4.1'
   gem 'byebug',  '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'pry-rails'  # irbの代わりにpryにする
 end
 
 group :development do
@@ -20,19 +19,21 @@ group :development do
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.1.0'
   gem 'spring-watcher-listen', '2.0.1'
-  gem 'hirb'   # モデルの出力結果を表形式で表示するGem
-  gem 'hirb-unicode' # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
 end
 
 group :test do
-  gem 'capybara',           '3.28.0'
-  gem 'selenium-webdriver', '3.142.4'
-  gem 'webdrivers',         '4.1.2'
+  gem 'capybara',                 '3.28.0'
+  gem 'selenium-webdriver',       '3.142.4'
+  gem 'webdrivers',               '4.1.2'
+  gem 'rails-controller-testing', '1.0.4'
+  gem 'minitest',                 '5.11.3'
+  gem 'minitest-reporters',       '1.3.8'
+  gem 'guard',                    '2.16.2'
+  gem 'guard-minitest',           '2.4.6'
 end
 
 group :production do
   gem 'pg', '1.1.4'
-  gem 'rails_12factor', group: :production
 end
 
 # Windows ではタイムゾーン情報用の tzinfo-data gem を含める必要があります
