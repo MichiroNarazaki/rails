@@ -8,12 +8,12 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get root" do
 	  get root_url#ルートとして設定したためroot_urlが使える
     assert_response :success
-	  assert_select "title","Home | #{@base_title}"#rootとしてHomeアクションを用いているためhomeと同じになる
+	  assert_select "title","#{@base_title}"#rootとしてHomeアクションを用いているためhomeと同じになる
 end
   test "should get home" do
 	  get static_pages_home_url
     assert_response :success
-	  assert_select "title","Home | #{@base_title}"
+	  assert_select "title","#{@base_title}"
 end
 
 test "should get help" do
