@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])#これなくてもいける
+    # debugger#デバッグするときにこれを挿入することで@userなどターミナルでアクセスできるようになる
   end
 
   # GET /users/new
@@ -27,6 +29,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    # @user = User.new(params[:user])//マスアサインメント
     @user = User.new(user_params)
     respond_to do |format|
       # begin
@@ -38,7 +41,8 @@ class UsersController < ApplicationController
       #   format.json { render json: @user.errors, status: :unprocessable_entity }
       # end
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        flash[:success] = "Welcome to the Sample App!"
+        format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -79,6 +83,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password,:password_confirmation)
     end
 end
