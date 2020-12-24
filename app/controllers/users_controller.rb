@@ -32,15 +32,8 @@ class UsersController < ApplicationController
     # @user = User.new(params[:user])//マスアサインメント
     @user = User.new(user_params)
     respond_to do |format|
-      # begin
-      #   @user.save!
-      #   format.html { redirect_to @user, notice: 'User was successfully created.' }
-      #   format.json { render :show, status: :created, location: @user }
-      # rescue ActiveRecord::RecordInvalid => e
-      #   format.html { render :new }
-      #   format.json { render json: @user.errors, status: :unprocessable_entity }
-      # end
       if @user.save
+        log_in @user
         flash[:success] = "Welcome to the Sample App!"
         format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }

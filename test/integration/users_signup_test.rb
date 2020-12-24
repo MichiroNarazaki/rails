@@ -26,6 +26,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'users/show'#登録完了したのでユーザページへ
     assert_not flash.blank? ,"flash is blank"
+    assert is_logged_in?
     # assert_select ".alert", "Welcome to the Sample App!"
   end
 end
