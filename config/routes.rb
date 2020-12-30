@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/contact' ,to: 'static_pages#contact'
   resources :microposts
   resources :users
+  resources :account_activations, only: [:edit]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get '/signup' ,to: 'users#new'
   get    '/login',   to: 'sessions#new'

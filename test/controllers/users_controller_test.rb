@@ -15,19 +15,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_path
     assert_redirected_to login_url
   end
-  
-#########################################
-###validateひっかかるとエラー出る
-test "should create user" do
-  assert_difference('User.count') do
-    # post users_url, params: { user: { email: "abc@a.com", name: "sample sample" ,password_digest: "sinvsbvjjv;bjasvj;s;anvj;n"} }
-    # post users_url, params: { user: { email: @user2.email, name: @user2.name ,password: @user2.password_digest } }
-    post users_url, params: { user: { email: "thisismail@sample.com", name: @user.name ,password: @user.password_digest } }
-  end
-  assert_redirected_to user_url(User.last)
-end
-#########################################
-
   test "should show user" do
     get user_url(@user)
     assert_response :success

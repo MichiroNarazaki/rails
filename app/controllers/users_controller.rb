@@ -5,14 +5,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])#これなくてもいける
-    # debugger#デバッグするときにこれを挿入することで@userなどターミナルでアクセスできるようになる
+    @user = User.find(params[:id])
+    redirect_to root_url and return unless @user.activated?
   end
 
   # GET /users/new
@@ -31,18 +31,16 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    # @user = User.new(params[:user])//マスアサインメント
     @user = User.new(user_params)
-    respond_to do |format|
-      if @user.save
-        log_in @user
-        flash[:success] = "Welcome to the Sample App!"
-        format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
+    else
+      puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      puts @user.name
+      puts @user.email
+      render 'new'
     end
   end
   
