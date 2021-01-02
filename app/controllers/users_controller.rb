@@ -37,9 +37,6 @@ class UsersController < ApplicationController
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
-      puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-      puts @user.name
-      puts @user.email
       render 'new'
     end
   end
